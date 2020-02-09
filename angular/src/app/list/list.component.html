@@ -1,0 +1,51 @@
+<!-- Display Map View -->
+<div style="width: 100%; padding-left: 10px; height: 430px;">
+  <app-map (notifyParent)="updateSelected($event)" [parentSelectedRow]="selectedRow"></app-map>
+</div>
+
+<!-- Display Datasheet View -->
+<div style="width: 60%; float: left;"> <!-- Table display data -->
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <caption>{{ data [0].municipality_name}} - {{ data [0].county_name}} -
+    {{ data[0].crash_month }}/ {{ data[0].crash_year}} - {{ data.length }} crash records</caption>
+  <ng-container matColumnDef="collision_type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Collision Type </th>
+    <td mat-cell *matCellDef="let item" > {{item.collision_type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="injury_count">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Injury Count </th>
+    <td mat-cell *matCellDef="let item"> {{item.injury_count}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="agressive_driving">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Aggressive Driving </th>
+    <td mat-cell *matCellDef="let item"> {{item.agressive_driving}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="hour_of_day">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Hour of Day </th>
+    <td mat-cell *matCellDef="let item"> {{item.hour_of_day}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="illumination">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Illumination </th>
+    <td mat-cell *matCellDef="let item"> {{item.illumination}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="road_condition">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Road Condition </th>
+    <td mat-cell *matCellDef="let item"> {{item.road_condition}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" style="height: 25px !important;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="height: 20px !important;"
+    [ngClass]="{'highlight': selectedRow !== undefined && selectedRow.crash_record_number == row.crash_record_number}"
+    (click)="onRowClicked(row)"></tr>
+
+</table>
+</div>
+<!-- Display Detail View -->
+<div style="width: 38%; float: right; padding: 10px; padding-top: 20px">
+  <app-detail [parentSelectedRow]="selectedRow"></app-detail>
+</div>

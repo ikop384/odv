@@ -1,0 +1,37 @@
+CREATE TABLE crash_incident
+(
+  crash_record_number bigint PRIMARY KEY,
+  county_code integer,
+  county_name varchar,
+  municipality_code integer,
+  municipality_name varchar,
+  crash_year integer,
+  crash_month integer,
+  day_of_week integer,
+  time_of_day integer,
+  hour_of_day integer,
+  illumination varchar,
+  weather varchar,
+  road_condition varchar,
+  collision_type varchar,
+  fatality_count smallint,
+  injury_count smallint,  
+  arrival_time integer,
+  dispatch_time integer,
+  vehicle_count smallint,
+  automobile_count smallint,
+  motorcycle_count smallint,
+  bus_count smallint,
+  small_truck_count smallint,
+  heavy_truck_count smallint,
+  suv_count smallint,
+  van_count smallint,
+  bicycle_count smallint,
+  pedestrian_count smallint,
+  latitude decimal,
+  longitude decimal,
+  speeding varchar,
+  agressive_driving varchar   
+);
+
+COPY crash_incident FROM 'ODV_data.csv' DELIMITER ',' CSV HEADER;

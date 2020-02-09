@@ -1,0 +1,43 @@
+<div *ngIf="parentSelectedRow; else elseBlock">
+<mat-card><h4>Incident Detail</h4>
+  <p>Crash Record Number: {{ parentSelectedRow.crash_record_number }}</p>
+  <p>Time Occured: {{ parentSelectedRow.time_of_day }} (Hour: {{ parentSelectedRow.hour_of_day }} )
+    <br>Police arrived: {{ parentSelectedRow.arrival_time }}, Dispatched: {{ parentSelectedRow.dispatch_time }}
+  </p>
+  <p>Weather:  {{ parentSelectedRow.weather }} <br>
+    Speeding: {{ parentSelectedRow.speeding }}, Aggresive Driving: {{ parentSelectedRow.agressive_driving }}
+  </p>
+
+  <p>Injury Count:  {{ parentSelectedRow.injury_count }} - Fatality Count:  {{ parentSelectedRow.fatality_count }} </p>
+
+  <p>Vehicle Count: {{ parentSelectedRow.vehicle_count }} ( {{ vehicleText }} )
+    <br> Pedestrian Count: {{ parentSelectedRow.pedestrian_count }}
+  </p>
+  <p>Latitude:  {{ parentSelectedRow.latitude }} <br> Longitude:  {{ parentSelectedRow.longitude }}</p>
+</mat-card>
+<br>
+<button mat-flat-button color="primary" (click)="showStatus()">Show Status</button>
+</div>
+
+<ng-template #elseBlock>
+<mat-card> <h4>Statistic</h4>
+  <p>Total injuries: {{ injuryCount }}. Total fatalities: {{ fatalityCount }} </p>
+  <p>Speeding: {{ speedingCount/incidentCount | percent }}. Aggressive Driving: {{ agressiveCount/incidentCount | percent }}</p>
+  <p><b>Collision Type:</b><span *ngFor="let item of getKeys(colTypeHash)">
+    {{ colTypeHash.get(item)/incidentCount | percent }} {{ item }}.</span></p>
+  <p><b>Illumination:</b><span *ngFor="let item of getKeys(illumTypeHash)">
+    {{ illumTypeHash.get(item)/incidentCount | percent }} {{ item }}.</span></p>
+  <p><b>Road Condition:</b><span *ngFor="let item of getKeys(roadTypeHash)">
+    {{ roadTypeHash.get(item)/incidentCount | percent }} {{ item }}.</span></p>
+  <p><b>Weather:</b><span *ngFor="let item of getKeys(weatherTypeHash)">
+    {{ weatherTypeHash.get(item)/incidentCount | percent }} {{ item }}.</span></p>
+
+  <p><b>Total Vehicles: {{ vehicleCount }}.</b><span *ngFor="let item of getKeys(vehicleTypeHash)">
+    {{ vehicleTypeHash.get(item)/vehicleCount | percent }} {{ item }}.</span></p>
+  <p>Total Pedestrian: {{ pedestrianCount }}</p>
+
+  <b>Hour of Day:</b>
+  <ul><li *ngFor="let item of getSortedKeys(hourHash)">
+    {{ item }} Hour --> {{ hourHash.get(item)/24 | percent }}</li></ul>
+
+  </mat-card></ng-template>

@@ -1,0 +1,42 @@
+<form (ngSubmit)="onSubmit()" >
+  <mat-form-field [style.width.px]=150>
+    <mat-label>County</mat-label>
+    <mat-select [(value)]="selectedCounty">
+      <mat-option value='46'>Montgomery</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field [style.width.px]=150>
+    <mat-label>Municipality</mat-label>
+    <mat-select [(value)]="selectedMunicipality">
+      <mat-option value='46220'> Upper Merion Twp</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field [style.width.px]=70 >
+    <mat-label>Year</mat-label>
+    <mat-select [(value)]="selectedYear" [formControl]="selectFormControl" required>
+      <mat-option *ngFor="let year of years" [value]="year">{{ year }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field [style.width.px]=100>
+    <mat-label>Month</mat-label>
+    <mat-select [(value)]="selectedMonth" [formControl]="selectFormControl" required>
+      <mat-option value=1>January</mat-option>
+      <mat-option value=2>February</mat-option>
+      <mat-option value=3>March</mat-option>
+      <mat-option value=4>April</mat-option>
+      <mat-option value=5>May</mat-option>
+      <mat-option value=6>June</mat-option>
+      <mat-option value=7>July</mat-option>
+      <mat-option value=8>August</mat-option>
+      <mat-option value=9>September</mat-option>
+      <mat-option value=10>October</mat-option>
+      <mat-option value=11>November</mat-option>
+      <mat-option value=12>December</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;
+  <button mat-flat-button type="submit" color="primary">Search</button>
+</form>
